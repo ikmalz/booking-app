@@ -27,7 +27,16 @@ const ReserveForm = ({
   };
 
   const [state, formAction, isPending] = useActionState(
-    createReserve.bind(null, room.id, room.price, startDate, endDate),
+    async (prevState: unknown, formData: FormData) => {
+      return await createReserve(
+        room.id,
+        room.price,
+        startDate,
+        endDate,
+        prevState,
+        formData
+      );
+    },
     null
   );
 
