@@ -27,16 +27,7 @@ const ReserveForm = ({
   };
 
   const [state, formAction, isPending] = useActionState(
-    async (prevState: unknown, formData: FormData) => {
-      return await createReserve(
-        room.id,
-        room.price,
-        startDate,
-        endDate,
-        prevState,
-        formData
-      );
-    },
+    createReserve.bind(null, room.id, room.price, startDate, endDate),
     null
   );
 
@@ -55,14 +46,13 @@ const ReserveForm = ({
             Arrival - Departure
           </label>
           <DatePicker
-            selected={startDate}
+            selectsRange
             startDate={startDate}
             endDate={endDate}
-            minDate={new Date()}
-            selectsRange={true}
             onChange={handleDateChange}
+            minDate={new Date()}
             excludeDateIntervals={excludeDates}
-            dateFormat={"dd-MM-YYYY"}
+            dateFormat="dd-MM-yyyy"
             wrapperClassName="w-full"
             className="py-2 px-4 rounded-md border border-gray-300 w-full"
           />
