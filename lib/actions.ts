@@ -181,7 +181,6 @@ export const createReserve = async (
 
   const { name, phone } = validatedFields.data;
 
-  // ✅ di sini aman, karena sudah dipastikan bukan null
   const night = differenceInCalendarDays(endDate, startDate);
   if (night <= 0) return { messageDate: "Date Must be at least 1 night" };
 
