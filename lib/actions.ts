@@ -153,18 +153,14 @@ export const updateRoom = async (
 export const createReserve = async (
   roomId: string,
   price: number,
-  startDate: Date | null,
-  endDate: Date | null,
+  startDate: Date,
+  endDate: Date,
   prevState: unknown,
   formData: FormData
 ) => {
   const session = await auth();
   if (!session || !session.user || !session.user.id)
     redirect(`/signin?redirect_url=room/${roomId}`);
-
-  if (!startDate || !endDate) {
-    return { messageDate: "Please select arrival and departure dates" };
-  }
 
   const rawData = {
     name: formData.get("name"),
@@ -180,10 +176,8 @@ export const createReserve = async (
   }
 
   const { name, phone } = validatedFields.data;
-
   const night = differenceInCalendarDays(endDate, startDate);
   if (night <= 0) return { messageDate: "Date Must be at least 1 night" };
-
   const total = night * price;
 
   let reservationId;
@@ -198,10 +192,10 @@ export const createReserve = async (
       });
       const reservation = await tx.reservation.create({
         data: {
-          startDate,
-          endDate,
-          price,
-          roomId,
+          startDate: startDate,
+          endDate: endDate,
+          price: price,
+          roomId: roomId,
           userId: session.user.id as string,
           Payment: {
             create: {
