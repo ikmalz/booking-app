@@ -19,11 +19,10 @@ const ReserveForm = ({
 
   const [startDate, setStartDate] = useState(StartDate);
   const [endDate, setEndDate] = useState(EndDate);
-
-  const handleDateChange = (dates: [Date | null, Date | null]) => {
+  const handleDateChange = (dates: any) => {
     const [start, end] = dates;
-    setStartDate(start ?? StartDate);
-    setEndDate(end ?? EndDate);
+    setStartDate(start);
+    setEndDate(end);
   };
 
   const [state, formAction, isPending] = useActionState(
@@ -46,13 +45,14 @@ const ReserveForm = ({
             Arrival - Departure
           </label>
           <DatePicker
-            selectsRange
+            selected={startDate}
             startDate={startDate}
             endDate={endDate}
-            onChange={handleDateChange}
             minDate={new Date()}
+            selectsRange={true}
+            onChange={handleDateChange}
             excludeDateIntervals={excludeDates}
-            dateFormat="dd-MM-yyyy"
+            dateFormat={"dd-MM-YYYY"}
             wrapperClassName="w-full"
             className="py-2 px-4 rounded-md border border-gray-300 w-full"
           />
