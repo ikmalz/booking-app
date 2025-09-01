@@ -16,7 +16,7 @@ const Navlink = () => {
         <div className="flex items-center justify-end md:order-2">
           <div className="hidden text-sm bg-gray-50 border rounded-full md:me-0 md:block focus:ring-4 focus:ring-gray-300">
             <Image
-              src={session.user.image || "/hero.jpg"}
+              src={session.user.image || "/star_hotel.png"}
               width={64}
               height={64}
               alt="avatar"

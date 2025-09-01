@@ -36,7 +36,14 @@ const ReserveForm = ({
       if (!startDate || !endDate) {
         return { messageDate: "Harap pilih tanggal mulai dan selesai" };
       }
-      return createReserve(room.id, room.price, startDate, endDate, prevState, formData);
+      return createReserve(
+        room.id,
+        room.price,
+        startDate,
+        endDate,
+        prevState,
+        formData
+      );
     },
     null
   );
