@@ -6,7 +6,7 @@ const Hero = () => {
     <div className="relative h-screen text-white  overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/hotell.jpeg"
+          src="/heroImage.png"
           alt="hero image"
           fill
           className="object-cover object-center w-full h-full"

@@ -13,7 +13,6 @@ export const RoomSchema = object({
 export const ReserveSchema = object({
   name: string().min(1),
   phone: string().min(12),
- 
 });
 
 export const ContactSchema = object({
@@ -23,7 +22,7 @@ export const ContactSchema = object({
     .email("Please enter a valid email"),
   subject: string().min(6, "Subject at least 6 carachters"),
   message: string()
-    .min(50, "Message at least 50 carachters")
+    .min(10, "Message at least 10 carachters")
     .max(200, "Message at least 200 carachters"),
 });
 
