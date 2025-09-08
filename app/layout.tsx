@@ -14,17 +14,29 @@ const raleway = Raleway({
 export const metadata: Metadata = {
   title: "Create Next App",
   description: "Online Booking Hotel",
+  manifest: "/manifest.json",
+  themeColor: "#4f46e5",
+  icons: {
+    icon: "/icons/icon-192x192.png",
+    apple: "/icons/icon-192x192.png",
+  },
 };
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-
+}) {
   const session = await auth();
+
   return (
     <html lang="en">
+      <head>
+        {/* Kalau mau manual tambahin juga meta lain */}
+        <meta name="theme-color" content="#4f46e5" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+      </head>
       <body className={`${raleway.variable} antialiased`}>
         <SessionProvider session={session}>
           <Navbar />
