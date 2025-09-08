@@ -12,7 +12,7 @@ export const RoomSchema = object({
 
 export const ReserveSchema = object({
   name: string().min(1),
-  phone: string().min(12),
+  phone: string().min(10),
 });
 
 export const ContactSchema = object({

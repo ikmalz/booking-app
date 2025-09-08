@@ -15,11 +15,14 @@ export const metadata: Metadata = {
   title: "Create Next App",
   description: "Online Booking Hotel",
   manifest: "/manifest.json",
-  themeColor: "#4f46e5",
   icons: {
     icon: "/icons/icon-192x192.png",
     apple: "/icons/icon-192x192.png",
   },
+};
+
+export const viewport = {
+  themeColor: "#4f46e5",
 };
 
 export default async function RootLayout({

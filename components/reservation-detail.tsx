@@ -18,7 +18,10 @@ const ReservationDetail = async ({
         <ul className="space-y-4">
           <li className="flex justify-between items-center">
             <span className="text-sm text-gray-600">Reservation ID</span>
-            <span className="text-base font-semibold text-gray-900">
+            <span
+              className="text-base font-semibold text-gray-900 break-words md:truncate md:max-w-[200px]"
+              title={reservation.id}
+            >
               #{reservation.id}
             </span>
           </li>
@@ -36,7 +39,10 @@ const ReservationDetail = async ({
           </li>
           <li className="flex justify-between items-center">
             <span className="text-sm text-gray-600">Email</span>
-            <span className="text-base font-semibold text-gray-900">
+            <span
+              className="text-base font-semibold text-gray-900 break-words md:truncate md:max-w-[200px]"
+              title={reservation.User.email}
+            >
               {reservation.User.email}
             </span>
           </li>
@@ -72,8 +78,37 @@ const ReservationDetail = async ({
         </ul>
       </div>
 
-      {/* Table */}
-      <div className="mt-10 overflow-x-auto">
+      {/* Mobile Card View */}
+      <div className="mt-10 space-y-4 block md:hidden">
+        <div className="border rounded-xl p-4 shadow-sm">
+          <h3 className="font-semibold text-gray-900 mb-2">
+            {reservation.Room.name}
+          </h3>
+          <p className="text-sm text-gray-600">
+            Price: {formatCurrency(reservation.price)}
+          </p>
+          <p className="text-sm">
+            Arrival: {formatDate(reservation.startDate.toISOString())}
+          </p>
+          <p className="text-sm">
+            Departure: {formatDate(reservation.endDate.toISOString())}
+          </p>
+          <p className="text-sm">
+            Duration:{" "}
+            {differenceInCalendarDays(
+              reservation.endDate,
+              reservation.startDate
+            )}{" "}
+            Night
+          </p>
+          <p className="text-right font-bold text-orange-600 mt-2">
+            {reservation.Payment && formatCurrency(reservation.Payment.amount)}
+          </p>
+        </div>
+      </div>
+
+      {/* Desktop Table View */}
+      <div className="mt-10 overflow-x-auto hidden md:block">
         <table className="w-full text-sm text-gray-700 border-collapse">
           <thead>
             <tr className="bg-orange-50 text-xs uppercase text-gray-700">

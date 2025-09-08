@@ -1,13 +1,20 @@
 import type { NextConfig } from "next";
-import withPWA from "next-pwa";
+import withPWAInit from "next-pwa";
+
+const withPWA = withPWAInit({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development", 
+});
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify: true,
   async headers() {
     return [
       {
-        source: "/api/payment/notification/:path",
+        source: "/api/payment/notification/:path*",
         headers: [
           { key: "Access-Control-Allow-Origin", value: "*" },
           { key: "Access-Control-Allow-Methods", value: "GET,POST" },
@@ -22,7 +29,10 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "lh3.googleusercontent.com" },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
       {
         protocol: "https",
         hostname: "vzraryzwr9zkzqds.public.blob.vercel-storage.com",
@@ -31,8 +41,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPWA({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
-})(nextConfig);
+export default withPWA(nextConfig);
