@@ -11,22 +11,32 @@ const SignInPage = async ({
   searchParams?: Promise<{ redirect_url?: string }>;
 }) => {
   const params = (await searchParams)?.redirect_url;
-  let redirectUrl;
-  if (!params) {
-    redirectUrl = "/";
-  } else {
-    redirectUrl = `/${params}`;
-  }
+  const redirectUrl = params ? `/${params}` : "/";
+
   return (
-    <div className="min-h-screen flex items-center">
-      <div className="bg-white w-96 mx-auto rounded-sm shadow p-8">
-        <h1 className="text-4xl font-bold mb-1">SignIn</h1>
-        <p className="font-medium mb-5 text-gray-500">
-          Sign In to your account
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+        <h1 className="text-3xl font-semibold text-gray-800 text-center">
+          Welcome Back
+        </h1>
+        <p className="text-gray-500 text-center mt-2 mb-8">
+          Sign in to continue
         </p>
-        <div className="py-4 text-center">
+
+        <div className="space-y-4">
           <LoginGoogleButton redirectUrl={redirectUrl} />
         </div>
+
+        <p className="text-sm text-gray-400 text-center mt-8">
+          By signing in, you agree to our{" "}
+          <a href="#" className="text-orange-500 hover:underline">
+            Terms
+          </a>{" "}
+          and{" "}
+          <a href="#" className="text-orange-500 hover:underline">
+            Privacy Policy
+          </a>
+        </p>
       </div>
     </div>
   );

@@ -9,9 +9,9 @@ export const LoginGoogleButton = ({ redirectUrl }: { redirectUrl: string }) => {
         await signIn("google", { redirectTo: redirectUrl });
       }}
     >
-      <button className="flex items-center justify-center gap-2 w-full bg-blue-700 text-white font-medium py-3 px-6 text-base rounded-sm hover:bg-blue-600 cursor-pointer">
-        <FaG className="size-6" />
-        Sign In With Google
+      <button className="flex items-center justify-center gap-3 w-full bg-white border border-gray-300 text-gray-700 font-medium py-3 px-6 rounded-xl shadow-sm hover:shadow-md hover:border-gray-400 transition-all duration-300 cursor-pointer">
+        <FaG className="text-red-500 size-5" />
+        <span className="text-sm font-medium">Sign in with Google</span>
       </button>
     </form>
   );

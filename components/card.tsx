@@ -6,41 +6,46 @@ import { formatCurrency } from "@/lib/utils";
 
 const Card = ({ room }: { room: Room }) => {
   return (
-    <div className="bg-white shadow-sm rounded-2xl transition duration-100 hover:shadow-lg">
-      <div className="h-[260px] w-auto rounded-t-sm relative ">
+    <div className="bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
+      {/* Image */}
+      <div className="relative h-60 w-full">
         <Image
           src={room.image}
-          width={384}
-          height={256}
           alt="Room Image"
-          className="w-full h-full object-cover rounded-t-lg"
+          fill
+          className="object-cover"
         />
       </div>
-      <div className="p-8">
-        <h4 className="text-2xl font-medium">
-          <Link
-            href={`/room/${room.id}`}
-            className="hover:text-gray-800 transition duration-150"
-          >
-            {room.name}
-          </Link>
-        </h4>
-        <h4 className="text-2xl mb-7 ">
-          <span className="font-semibold text-gray-600">
-            {formatCurrency(room.price)}
-          </span>
-          <span className="text-gray-400 text-sm">/night</span>
-        </h4>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col gap-4">
+        <div>
+          <h4 className="text-xl font-semibold text-gray-800 tracking-tight">
+            <Link
+              href={`/room/${room.id}`}
+              className="hover:text-orange-500 transition-colors"
+            >
+              {room.name}
+            </Link>
+          </h4>
+          <p className="text-gray-500 mt-1">
+            <span className="font-medium text-gray-900">
+              {formatCurrency(room.price)}
+            </span>
+            <span className="text-sm text-gray-400 ml-1">/night</span>
+          </p>
+        </div>
+
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <IoPeopleOutline />
-            <span>
+          <div className="flex items-center gap-2 text-gray-600">
+            <IoPeopleOutline className="text-lg" />
+            <span className="text-sm">
               {room.capacity} {room.capacity === 1 ? "person" : "people"}
             </span>
           </div>
           <Link
             href={`/room/${room.id}`}
-            className="px-6 py-2.5 md:px-10 md:py-3 font-semibold text-white bg-orange-400 rounded-lg hover:bg-orange-500 transition duration-150"
+            className="px-5 py-2 rounded-xl font-medium text-sm text-white bg-orange-500 hover:bg-orange-600 transition-colors"
           >
             Book Now
           </Link>

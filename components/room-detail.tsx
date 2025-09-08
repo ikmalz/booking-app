@@ -54,7 +54,7 @@ const RoomDetail = async ({ roomId }: { roomId: string }) => {
             </div>
           </div>
           {/* Reservation Form */}
-          <ReserveForm room={room} disableDate={disableDate}/>
+          <ReserveForm room={room} disableDate={disableDate} />
         </div>
       </div>
     </div>

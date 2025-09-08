@@ -48,7 +48,7 @@ const Navlink = () => {
           <li>
             <Link
               href="/"
-              className="block py-2 px-3 text-gray-800 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0 hover:underline-offset-4 hover:underline hover:decoration-2 hover:decoration-orange-400"
+              className="block py-2 px-3 text-gray-800 transition-all duration-200 hover:bg-gray-100 rounded-sm md:hover:bg-transparent md:p-0 hover:underline-offset-4 hover:underline hover:decoration-2 hover:decoration-orange-400"
             >
               Home
             </Link>
