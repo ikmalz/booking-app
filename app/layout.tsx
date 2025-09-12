@@ -35,7 +35,6 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Kalau mau manual tambahin juga meta lain */}
         <meta name="theme-color" content="#4f46e5" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />

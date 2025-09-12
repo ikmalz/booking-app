@@ -12,16 +12,22 @@ const MyReservationPage = async () => {
   if (!session || !session.user) redirect("/signin");
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="max-w-5xl mx-auto py-28 px-4 lg:px-6">
-        <div className="bg-orange-50 rounded-xl p-6 mb-10 border border-orange-100">
-          <h3 className="text-2xl font-bold text-gray-800">
-            Hi, <span className="text-orange-600">{session.user.name}</span>
-          </h3>
-          <p className="mt-2 text-gray-600">
-            Here&apos;s your booking history:
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-slate-50">
+      <div className="max-w-5xl mx-auto py-24 px-4 lg:px-6">
+        {/* Header Section */}
+        <div className="bg-white rounded-2xl shadow-sm border border-orange-100 p-8 mb-12">
+          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+            Welcome back,{" "}
+            <span className="text-orange-600">{session.user.name}</span> 👋
+          </h1>
+          <p className="mt-3 text-gray-600 text-base">
+            Here’s your latest{" "}
+            <span className="font-medium text-gray-800">reservation history</span>.  
+            Keep track of your bookings easily.
           </p>
         </div>
+
+        {/* Reservation List */}
         <MyReserveList />
       </div>
     </div>

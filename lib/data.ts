@@ -200,7 +200,8 @@ export const getReservations = async () => {
       orderBy: { createdAt: "desc" },
     });
     return result;
-  } catch (error) {
+   } catch (error) {
     console.log(error);
+    return []; 
   }
 };
