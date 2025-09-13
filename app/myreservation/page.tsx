@@ -21,9 +21,11 @@ const MyReservationPage = async () => {
             <span className="text-orange-600">{session.user.name}</span> 👋
           </h1>
           <p className="mt-3 text-gray-600 text-base">
-            Here&apos;s your latest{" "}
-            <span className="font-medium text-gray-800">reservation history</span>.  
-            Keep track of your bookings easily.
+            Here&rsquo;s your latest{" "}
+            <span className="font-medium text-gray-800">
+              reservation history
+            </span>
+            . Keep track of your bookings easily.
           </p>
         </div>
 
