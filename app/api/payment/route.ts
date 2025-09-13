@@ -41,7 +41,7 @@ export const POST = async (request: Request) => {
     });
 
     return NextResponse.json({ token });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Payment API error:", error);
     return NextResponse.json(
       { error: "Failed to create payment" },
