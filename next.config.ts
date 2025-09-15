@@ -5,12 +5,11 @@ const withPWA = withPWAInit({
   dest: "public",
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === "development", 
+  disable: process.env.NODE_ENV === "development",
 });
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // swcMinify: true,
   async headers() {
     return [
       {
@@ -29,10 +28,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "lh3.googleusercontent.com",
-      },
+      { protocol: "https", hostname: "lh3.googleusercontent.com" },
       {
         protocol: "https",
         hostname: "vzraryzwr9zkzqds.public.blob.vercel-storage.com",
