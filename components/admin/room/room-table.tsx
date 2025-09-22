@@ -20,10 +20,16 @@ const RoomTable = async () => {
               Room Name
             </th>
             <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase text-left">
+              Type
+            </th>
+            <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase text-left">
               Price
             </th>
             <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase text-left">
               Created At
+            </th>
+            <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase text-left">
+              Updated At
             </th>
             <th className="px-6 py-3 text-xs font-semibold text-gray-600 uppercase text-center">
               Action
@@ -50,11 +56,15 @@ const RoomTable = async () => {
                 </div>
               </td>
               <td className="px-6 py-4 text-sm text-gray-700">{room.name}</td>
+              <td className="px-6 py-4 text-sm text-gray-700">{room.type}</td>
               <td className="px-6 py-4 text-sm text-gray-700">
                 {formatCurrency(room.price)}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500">
                 {formatDate(room.createdAt.toString())}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-500">
+                {formatDate(room.updatedAt.toString())}
               </td>
               <td className="px-6 py-4">
                 <div className="flex items-center justify-center gap-2">

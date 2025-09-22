@@ -8,6 +8,7 @@ export const RoomSchema = object({
   amenities: array(string()).nonempty({
     message: "Pilih minimal satu fasilitas",
   }),
+  type: string().min(1, { message: "Tipe kamar wajib diisi" }), 
 });
 
 export const ReserveSchema = object({

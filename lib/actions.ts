@@ -21,6 +21,7 @@ export const saveRoom = async (
     capacity: formData.get("capacity"),
     price: formData.get("price"),
     amenities: formData.getAll("amenities"),
+    type: formData.get("type"),
   };
 
   const validatedFields = RoomSchema.safeParse(rawData);
@@ -28,7 +29,7 @@ export const saveRoom = async (
     return { error: validatedFields.error.flatten().fieldErrors };
   }
 
-  const { name, description, price, capacity, amenities } =
+  const { name, description, price, capacity, amenities, type } =
     validatedFields.data;
 
   try {
@@ -39,6 +40,7 @@ export const saveRoom = async (
         image,
         price,
         capacity,
+        type,
         RoomAmenities: {
           createMany: {
             data: amenities.map((item) => ({
@@ -111,6 +113,7 @@ export const updateRoom = async (
     capacity: formData.get("capacity"),
     price: formData.get("price"),
     amenities: formData.getAll("amenities"),
+    type: formData.get("type"), 
   };
 
   const validatedFields = RoomSchema.safeParse(rawData);
@@ -118,8 +121,7 @@ export const updateRoom = async (
     return { error: validatedFields.error.flatten().fieldErrors };
   }
 
-  const { name, description, price, capacity, amenities } =
-    validatedFields.data;
+  const { name, description, price, capacity, amenities, type } = validatedFields.data;
 
   try {
     await prisma.$transaction([
@@ -131,6 +133,7 @@ export const updateRoom = async (
           image,
           price,
           capacity,
+          type, 
           RoomAmenities: {
             deleteMany: {},
           },
@@ -146,9 +149,11 @@ export const updateRoom = async (
   } catch (error) {
     console.log(error);
   }
+
   revalidatePath("/admin/room");
   redirect("/admin/room");
 };
+
 
 export const createReserve = async (
   roomId: string,

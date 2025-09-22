@@ -21,6 +21,7 @@ model Room {
   image         String
   price         Int
   capacity      Int             @default(1)
+  type          String          @default("Standard")
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   RoomAmenities RoomAmenities[]
@@ -64,7 +65,7 @@ model Payment {
   method        String?
   amount        Int
   status        String      @default("unpaid")
-  token         String? 
+  token         String?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
   reservationId String      @unique
