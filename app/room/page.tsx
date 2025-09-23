@@ -14,7 +14,7 @@ const RoomPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <HeaderSection
         title="Rooms & Rates"
-        subTitle="Temukan kenyamanan terbaik di setiap kamar. Pilih sesuai kebutuhan Anda dan rasakan pengalaman menginap modern dengan fasilitas premium."
+        subTitle="Discover the ultimate in comfort in every room. Choose according to your needs and experience a modern stay with premium amenities."
       />
 
       <div className="mt-12 px-4 md:px-10 lg:px-20">

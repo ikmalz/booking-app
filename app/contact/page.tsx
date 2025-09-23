@@ -16,7 +16,7 @@ const ContactPage = () => {
     <div className="bg-gray-100">
       <HeaderSection
         title="Contact Us"
-        subTitle="Lorem ipsum dolor sit amet."
+        subTitle="Discover the ultimate in comfort in every room. Choose according to your needs and experience a modern stay with premium amenities."
       />
       <div className="max-w-screen-xl mx-auto py-20 px-4">
         <div className="grid md:grid-cols-2 gap-8">
