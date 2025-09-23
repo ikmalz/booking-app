@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Card from "@/components/card";
+import { Room } from "@prisma/client"; 
 
-export default function MainClient({ rooms }: { rooms: any[] }) {
+export default function MainClient({ rooms }: { rooms: Room[] }) {
   const [selectedType, setSelectedType] = useState("all");
 
   const filteredRooms =

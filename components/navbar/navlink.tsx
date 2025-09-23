@@ -78,7 +78,7 @@ const Navlink = () => {
 
           {/* Dropdown user info */}
           {showUserMenu && (
-            <div className="absolute right-0 top-12 w-72 bg-white border border-2 border-gray-200 rounded-xl shadow-lg z-50 animate-fade-in">
+            <div className="absolute right-0 top-12 w-72 bg-white border border-gray-200 rounded-xl shadow-lg z-50 animate-fade-in">
               <div className="flex flex-col items-center p-5 border-b border-gray-100">
                 <Image
                   src={session.user.image || "/star_hotel.png"}

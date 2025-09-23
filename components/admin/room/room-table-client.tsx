@@ -8,7 +8,19 @@ import { DeleteButton, EditButton } from "@/components/admin/room/button";
 
 const ITEMS_PER_PAGE = 10;
 
-export default function RoomTableClient({ rooms }: { rooms: any[] }) {
+interface Room {
+  id: string;
+  name: string;
+  type: string;
+  price: number;
+  image: string;
+  description: string;
+  capacity: number;
+  createdAt: Date | string;
+  updatedAt: Date | string;
+}
+
+export default function RoomTableClient({ rooms }: { rooms: Room[] }) {
   const [search, setSearch] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -114,8 +126,8 @@ export default function RoomTableClient({ rooms }: { rooms: any[] }) {
               </td>
               <td className="px-6 py-4">
                 <div className="flex items-center justify-center gap-2">
-                  <EditButton id={room.id} />
-                  <DeleteButton id={room.id} image={room.image} />
+                  <EditButton id={room.id.toString()} />
+                  <DeleteButton id={room.id.toString()} image={room.image} />
                 </div>
               </td>
             </tr>
