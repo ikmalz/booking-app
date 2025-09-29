@@ -15,9 +15,11 @@ const CheckoutDetail = async ({ reservationId }: { reservationId: string }) => {
   );
 
   return (
-    <div className="max-w-screen-xl mx-auto grid lg:grid-cols-2 gap-8 px-4">
+    <div className="max-w-screen-xl mx-auto grid lg:grid-cols-2 gap-8 px-4 sm:px-6 lg:px-0">
+      {/* Left Section */}
       <div className="space-y-6 order-2 lg:order-1">
-        <div className="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden">
+        {/* Room Info */}
+        <div className="bg-white border border-orange-100 rounded-2xl shadow-lg overflow-hidden">
           <div className="relative aspect-video">
             <Image
               src={reservation.Room.image}
@@ -27,80 +29,63 @@ const CheckoutDetail = async ({ reservationId }: { reservationId: string }) => {
             />
           </div>
           <div className="p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
               {reservation.Room.name}
             </h2>
             <p className="text-gray-600 flex items-center gap-2">
-              <span className="text-lg font-medium text-gray-800">
+              <span className="text-xl font-semibold text-orange-600">
                 {formatCurrency(reservation.price)}
               </span>
               <span className="text-sm text-gray-400">/ night</span>
             </p>
           </div>
         </div>
-        <div className="bg-white rounded-2xl shadow-md border border-gray-200 p-6">
+
+        {/* Payment Button */}
+        <div className="bg-white rounded-2xl shadow-md border border-orange-100 p-6">
           <PaymentButton reservation={reservation} />
         </div>
       </div>
 
-      <div className="bg-white border border-gray-200 rounded-2xl shadow-md p-6 order-1 lg:order-2">
-        <h3 className="text-xl font-semibold text-gray-900 mb-6">
+      {/* Right Section - Reservation Details */}
+      <div className="bg-white border border-orange-100 rounded-2xl shadow-lg p-6 order-1 lg:order-2">
+        <h3 className="text-xl font-bold text-gray-900 mb-6">
           Reservation Details
         </h3>
-        <div className="space-y-4">
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Reservation ID</span>
-            <span className="font-medium text-gray-800">#{reservation.id}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Name</span>
-            <span className="font-medium text-gray-800">
-              {reservation.User.name}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Email</span>
-            <span className="font-medium text-gray-800 truncate">
-              {reservation.User.email}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Phone</span>
-            <span className="font-medium text-gray-800">
-              {reservation.User.phone}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Arrival</span>
-            <span className="font-medium text-gray-800">
-              {formatDate(reservation.startDate.toISOString())}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Departure</span>
-            <span className="font-medium text-gray-800">
-              {formatDate(reservation.endDate.toISOString())}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Duration</span>
-            <span className="font-medium text-gray-800">
-              {duration} {duration <= 1 ? "Night" : "Nights"}
-            </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">Total Amount</span>
-            <span className="font-semibold text-gray-900">
+        <div className="grid gap-4 text-sm">
+          <DetailRow label="Reservation ID" value={`#${reservation.id}`} />
+          <DetailRow label="Name" value={reservation.User.name} />
+          <DetailRow label="Email" value={reservation.User.email} isTruncate />
+          <DetailRow label="Phone" value={reservation.User.phone} />
+          <DetailRow
+            label="Arrival"
+            value={formatDate(reservation.startDate.toISOString())}
+          />
+          <DetailRow
+            label="Departure"
+            value={formatDate(reservation.endDate.toISOString())}
+          />
+          <DetailRow
+            label="Duration"
+            value={`${duration} ${duration <= 1 ? "Night" : "Nights"}`}
+          />
+
+          {/* Highlight Total */}
+          <div className="flex justify-between items-center bg-orange-50 px-4 py-3 rounded-lg">
+            <span className="text-gray-600 font-medium">Total Amount</span>
+            <span className="text-lg font-bold text-orange-700">
               {formatCurrency(reservation.Payment.amount)}
             </span>
           </div>
-          <div className="flex justify-between text-sm">
+
+          {/* Status Badge */}
+          <div className="flex justify-between items-center">
             <span className="text-gray-500">Status</span>
             <span
-              className={`font-semibold ${
+              className={`px-3 py-1 rounded-full text-xs font-semibold ${
                 reservation.Payment.status === "PAID"
-                  ? "text-green-600"
-                  : "text-red-500"
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-600"
               }`}
             >
               {reservation.Payment.status}
@@ -111,5 +96,27 @@ const CheckoutDetail = async ({ reservationId }: { reservationId: string }) => {
     </div>
   );
 };
+
+const DetailRow = ({
+  label,
+  value,
+  isTruncate,
+}: {
+  label: string;
+  value: string | number | null | undefined;
+  isTruncate?: boolean;
+}) => (
+  <div className="flex justify-between items-center">
+    <span className="text-gray-500">{label}</span>
+    <span
+      className={`font-medium text-gray-800 text-right ${
+        isTruncate ? "truncate max-w-[220px]" : ""
+      } ml-4`}
+      title={isTruncate && value ? String(value) : undefined}
+    >
+      {value ?? "—"}
+    </span>
+  </div>
+);
 
 export default CheckoutDetail;
