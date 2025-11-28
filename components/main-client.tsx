@@ -2,21 +2,9 @@
 
 import { useState } from "react";
 import Card from "./card";
+import { RoomProps } from "@/types/room";
 
-interface Room {
-  id: string;
-  type: string;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-  capacity: number;
-  createdAt: string | Date;
-  updatedAt: string | Date;
-  [key: string]: any;
-}
-
-export default function MainClient({ rooms }: { rooms: Room[] }) {
+export default function MainClient({ rooms }: { rooms: RoomProps[] }) {
   const [selectedType, setSelectedType] = useState("all");
 
   const filteredRooms =
@@ -41,6 +29,7 @@ export default function MainClient({ rooms }: { rooms: Room[] }) {
         >
           All Types
         </button>
+
         {uniqueTypes.map((type) => (
           <button
             key={type}

@@ -2,20 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { IoPeopleOutline } from "react-icons/io5";
 import { formatCurrency } from "@/lib/utils";
+import { RoomProps } from "@/types/room";
 
-interface RoomClient {
-  id: string;
-  type: string;
-  name: string;
-  description: string;
-  image: string;
-  price: number;
-  capacity: number;
-  createdAt: string | Date;
-  updatedAt: string | Date;
-}
-
-const Card = ({ room }: { room: RoomClient }) => {
+const Card = ({ room }: { room: RoomProps }) => {
   return (
     <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-md hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
       {/* Image */}
