@@ -1,9 +1,22 @@
 "use client";
 
 import { useState } from "react";
-import Card from "@/components/card";
+import Card from "./card";
 
-export default function MainClient({ rooms }: { rooms: any[] }) {
+interface Room {
+  id: string;
+  type: string;
+  name: string;
+  description: string;
+  image: string;
+  price: number;
+  capacity: number;
+  createdAt: string | Date;
+  updatedAt: string | Date;
+  [key: string]: any;
+}
+
+export default function MainClient({ rooms }: { rooms: Room[] }) {
   const [selectedType, setSelectedType] = useState("all");
 
   const filteredRooms =

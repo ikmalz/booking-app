@@ -18,7 +18,7 @@ const AboutPage = () => {
     <div className={`${poppins.className} bg-white min-h-screen`}>
       <HeaderSection
         title="About Us"
-        subTitle="Discover luxury and comfort in the heart of Jakarta's vibrant cityscape."
+        subTitle="Discover luxury and comfort in the heart of Jakarta&apos;s vibrant cityscape."
       />
 
       {/* Hero Section */}
@@ -84,9 +84,9 @@ const AboutPage = () => {
                     Our Vision
                   </h3>
                   <p className="text-gray-700 leading-relaxed text-justify text-sm lg:text-base">
-                    To be Jakarta's most distinguished hotel destination,
+                    To be Jakarta&apos;s most distinguished hotel destination,
                     setting new standards for luxury hospitality while
-                    celebrating Indonesia's rich cultural heritage.
+                    celebrating Indonesia&apos;s rich cultural heritage.
                   </p>
                 </div>
               </div>
@@ -172,7 +172,7 @@ const AboutPage = () => {
             Experience Jakarta Like Never Before
           </h3>
           <p className="text-sm lg:text-base opacity-90 mb-6 lg:mb-8 max-w-2xl mx-auto">
-            Book your stay with us and discover why we're the preferred choice
+            Book your stay with us and Discover why we&apos;re the preferred choice
             for discerning travelers seeking luxury and comfort.
           </p>
           <button className="bg-white text-orange-600 font-semibold py-3 px-6 lg:py-4 lg:px-8 rounded-full hover:shadow-lg transform hover:scale-105 transition duration-200 text-sm lg:text-base">
