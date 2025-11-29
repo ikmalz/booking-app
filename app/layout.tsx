@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar/navbar";
 import Footer from "@/components/footer";
 import { SessionProvider } from "next-auth/react";
 import { auth } from "@/auth";
+import ChatBot from "@/components/chatbot/ChatBot";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -43,6 +44,7 @@ export default async function RootLayout({
         <SessionProvider session={session}>
           <Navbar />
           <main className="bg-gray-50 min-h-screen">{children}</main>
+          <ChatBot />
           <Footer />
         </SessionProvider>
       </body>

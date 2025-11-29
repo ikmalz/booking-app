@@ -1,4 +1,4 @@
-import { object, string, number, coerce, array } from "zod";
+import { object, string, coerce, array } from "zod";
 
 export const RoomSchema = object({
   name: string().min(1, { message: "Nama ruangan wajib diisi" }),
@@ -8,6 +8,7 @@ export const RoomSchema = object({
   amenities: array(string()).nonempty({
     message: "Pilih minimal satu fasilitas",
   }),
+  type: string().min(1, { message: "Tipe kamar wajib diisi" }), 
 });
 
 export const ReserveSchema = object({

@@ -9,6 +9,7 @@ import { BarLoader } from "react-spinners";
 import { Amenities } from "@prisma/client";
 import { RoomProps } from "@/types/room";
 import clsx from "clsx";
+import RoomTypeSelect from "@/components/RoomTypeSelect";
 
 const EditForm = ({
   amenities,
@@ -21,6 +22,7 @@ const EditForm = ({
   const [image, setImage] = useState(room.image);
   const [message, setMessage] = useState("");
   const [pending, startTranition] = useTransition();
+  const [roomType, setRoomType] = useState(room.type || "");
 
   const handleUpload = () => {
     if (!inputFileRef.current?.files) return null;
@@ -67,63 +69,71 @@ const EditForm = ({
 
   return (
     <form action={formAction}>
-      <div className="grid md:grid-cols-12 gap-5">
-        <div className="col-span-8 bg-white p-4">
-          <div className="mb-4">
+      <div className="grid md:grid-cols-12 gap-6">
+        {/* Left Column */}
+        <div className="col-span-8 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+          {/* Room Name */}
+          <div className="mb-5">
             <input
               type="text"
               name="name"
               defaultValue={room.name}
-              className="py-2 px-4 rounded-sm border border-gray-400 w-full"
-              placeholder="Room-Name."
+              className="py-3 px-4 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+              placeholder="Room Name"
             />
-            <div aria-live="polite" aria-atomic="true">
-              <span className="text-sm text-red-500 mt-2">
-                {state?.error?.name}
-              </span>
-            </div>
+            <span className="text-sm text-red-500 mt-2 block">
+              {state?.error?.name}
+            </span>
           </div>
-          <div className="mb-4">
+
+          {/* Description */}
+          <div className="mb-5">
             <textarea
-              rows={8}
+              rows={6}
               defaultValue={room.description}
               name="description"
-              className="py-2 px-4 rounded-sm border border-gray-400 w-full"
-              placeholder="description"
+              className="py-3 px-4 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
+              placeholder="Description..."
             ></textarea>
-            <div aria-live="polite" aria-atomic="true">
-              <span className="text-sm text-red-500 mt-2">
-                {state?.error?.description}
-              </span>
-            </div>
+            <span className="text-sm text-red-500 mt-2 block">
+              {state?.error?.description}
+            </span>
           </div>
-          <div className="mb-4 grid md:grid-cols-3">
-            {amenities.map((item) => (
-              <div className="flex items-center mb-4" key={item.id}>
-                <input
-                  type="checkbox"
-                  name="amenities"
-                  defaultValue={item.id}
-                  defaultChecked={checkedAmenities.includes(item.id)}
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
-                  placeholder="description"
-                />
-                <label className="ms-2 text-sm font-medium text-gray-900 capitalize">
-                  {item.name}
+
+          {/* Amenities */}
+          <div className="mb-5">
+            <h4 className="text-sm font-semibold text-gray-700 mb-3">
+              Amenities
+            </h4>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+              {amenities.map((item) => (
+                <label
+                  key={item.id}
+                  className="flex items-center gap-2 text-gray-700"
+                >
+                  <input
+                    type="checkbox"
+                    name="amenities"
+                    defaultValue={item.id}
+                    defaultChecked={checkedAmenities.includes(item.id)}
+                    className="w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-400"
+                  />
+                  <span className="capitalize">{item.name}</span>
                 </label>
-              </div>
-            ))}
-            <div aria-live="polite" aria-atomic="true">
-              <span className="text-sm text-red-500 mt-2">
-                {state?.error?.amenities}
-              </span>
+              ))}
             </div>
+            <span className="text-sm text-red-500 mt-2 block">
+              {state?.error?.amenities}
+            </span>
           </div>
         </div>
-        <div className="col-span-4 bg-white p-4">
+
+        {/* Right Column */}
+        <div className="col-span-4 bg-white p-6 rounded-xl shadow-sm border border-gray-100 flex flex-col">
+          {/* Image Upload */}
           <label
             htmlFor="input-file"
-            className="flex flex-col mb-4 items-center justify-center aspect-video border-2 border-gray-300 border-dashed rounded-md cursor-pointer bg-gray-50 relative"
+            className="flex flex-col mb-5 items-center justify-center aspect-video border-2 border-dashed border-gray-300 rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 relative transition"
           >
             <div className="flex flex-col items-center justify-center text-gray-500 pt-5 pb-6 z-10">
               {pending ? <BarLoader /> : null}
@@ -131,19 +141,21 @@ const EditForm = ({
                 <button
                   type="button"
                   onClick={() => deleteImage(image)}
-                  className="flex items-center justify-center bg-transparent size-6 absolute rounded-sm right-1 top-1 text-white hover:bg-red-400"
+                  className="flex items-center justify-center bg-red-500 hover:bg-red-600 size-7 absolute right-2 top-2 rounded-full text-white shadow-md"
                 >
-                  <IoTrashOutline className="size-4 text-transparent hover:text-white" />
+                  <IoTrashOutline className="size-4" />
                 </button>
               ) : (
                 <div className="flex flex-col items-center justify-center">
-                  <IoCloudUploadOutline className="size-8" />
-                  <p className="mb-1 text-sm font-bold">Select Image</p>
+                  <IoCloudUploadOutline className="size-8 text-orange-400" />
+                  <p className="mb-1 text-sm font-semibold text-gray-700">
+                    Select Image
+                  </p>
                   {message ? (
                     <p className="text-sm text-red-500">{message}</p>
                   ) : (
-                    <p className="text-xs">
-                      SVG, PNG, JPG, GIF, or Others (max: 4mb)
+                    <p className="text-xs text-gray-500">
+                      JPG, PNG, GIF (max: 4MB)
                     </p>
                   )}
                 </div>
@@ -163,57 +175,62 @@ const EditForm = ({
                 alt="image"
                 width={640}
                 height={360}
-                className="rounded-md absolute aspect-video object-cover"
+                className="rounded-lg absolute aspect-video object-cover"
               />
             )}
           </label>
-          <div className="mb-4">
+
+          <RoomTypeSelect
+            value={roomType}
+            onChange={(e) => setRoomType(e.target.value)}
+            error={state?.error?.type}
+          />
+
+          {/* Capacity */}
+          <div className="mb-5">
             <input
               type="text"
               name="capacity"
               defaultValue={room.capacity}
-              className="py-2 px-4 rounded-sm border border-gray-400 w-full"
+              className="py-3 px-4 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
               placeholder="Capacity..."
             />
-            <div aria-live="polite" aria-atomic="true">
-              <span className="text-sm text-red-500 mt-2">
-                {state?.error?.capacity}
-              </span>
-            </div>
+            <span className="text-sm text-red-500 mt-2 block">
+              {state?.error?.capacity}
+            </span>
           </div>
-          <div className="mb-4">
+
+          {/* Price */}
+          <div className="mb-5">
             <input
               type="text"
               name="price"
               defaultValue={room.price}
-              className="py-2 px-4 rounded-sm border border-gray-400 w-full"
+              className="py-3 px-4 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-orange-400"
               placeholder="Price..."
             />
-            <div aria-live="polite" aria-atomic="true">
-              <span className="text-sm text-red-500 mt-2">
-                {state?.error?.price}
-              </span>
-            </div>
+            <span className="text-sm text-red-500 mt-2 block">
+              {state?.error?.price}
+            </span>
           </div>
+
           {/* General Message */}
-          {state?.message ? (
-            <div className="mb-4 bg-red-200 p-2">
-              <span className="text-sm text-gray-700 mt-2">
-                {state.message}
-              </span>
+          {state?.message && (
+            <div className="mb-5 bg-red-100 border border-red-200 rounded-lg p-3 text-sm text-red-600">
+              {state.message}
             </div>
-          ) : null}
+          )}
+
+          {/* Submit Button */}
           <button
             type="submit"
             className={clsx(
-              "bg-orange-400 text-white w-full hover:bg-orange-500 py-2.5 px-6 md:px-10 text-lg font-semibold cursor-pointer",
-              {
-                "opacity-50 cursor-progress": isPending,
-              }
+              "bg-gradient-to-r from-orange-400 to-orange-500 text-white w-full py-3 px-6 rounded-lg font-semibold text-lg shadow-sm hover:shadow-md hover:from-orange-500 hover:to-orange-600 transition",
+              { "opacity-50 cursor-progress": isPending }
             )}
             disabled={isPending}
           >
-            {isPending ? "Updating...." : "update"}
+            {isPending ? "Updating..." : "Update"}
           </button>
         </div>
       </div>

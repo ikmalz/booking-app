@@ -44,16 +44,19 @@ const Footer = () => {
                 <h4 className="mb-8 text-xl font-semibold text-white">Legal</h4>
                 <ul className="list-item space-y-5 text-gray-400">
                   <li>
-                    <Link href="#">Legal</Link>
+                    <Link href="/legall">Legal</Link>
                   </li>
                   <li>
-                    <Link href="#">Term & Condition</Link>
+                    <Link href="/legal/term">Term & Condition</Link>
                   </li>
                   <li>
-                    <Link href="#">Payment Method</Link>
+                    <Link href="/legal/payment">Payment Method</Link>
                   </li>
                   <li>
-                    <Link href="#">Privacy Policy</Link>
+                    <Link href="/legal/privacy">Privacy Policy</Link>
+                  </li>
+                  <li>
+                    <Link href="/legal/disclaimer">Disclaimer</Link>
                   </li>
                 </ul>
               </div>

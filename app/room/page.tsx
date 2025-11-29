@@ -6,18 +6,19 @@ import RoomSkeleton from "@/components/skeletons/room-skeleton";
 
 export const metadata: Metadata = {
   title: "Rooms & Rates",
-  description: "Choose your best room today",
+  description: "Discover our curated selection of rooms with the best rates",
 };
 
 const RoomPage = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <HeaderSection
         title="Rooms & Rates"
-        subTitle="Lorem ipsum dolor sit amet."
+        subTitle="Temukan kenyamanan terbaik di setiap kamar. Pilih sesuai kebutuhan Anda dan rasakan pengalaman menginap modern dengan fasilitas premium."
       />
-      <div className="mt-10 px-4">
-        <Suspense fallback={<RoomSkeleton/>}>
+
+      <div className="mt-12 px-4 md:px-10 lg:px-20">
+        <Suspense fallback={<RoomSkeleton />}>
           <Main />
         </Suspense>
       </div>

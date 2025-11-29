@@ -42,7 +42,6 @@ const ReservationListClient: React.FC<Props> = ({ reservations }) => {
   const [statusFilter, setStatusFilter] = useState("all");
   const perPage = 5;
 
-  // Filtering + Searching
   const filteredReservations = useMemo(() => {
     return reservations.filter((item) => {
       const matchesSearch =
@@ -71,7 +70,7 @@ const ReservationListClient: React.FC<Props> = ({ reservations }) => {
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
-              setCurrentPage(1); // reset page tiap search
+              setCurrentPage(1);
             }}
             placeholder="🔍 Search by ID or Room name..."
             className="w-full px-4 py-2 rounded-lg border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition"
@@ -83,7 +82,7 @@ const ReservationListClient: React.FC<Props> = ({ reservations }) => {
           value={statusFilter}
           onChange={(e) => {
             setStatusFilter(e.target.value);
-            setCurrentPage(1); // reset page tiap filter
+            setCurrentPage(1);
           }}
           className="w-full md:w-auto px-3 py-2 rounded-lg border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 transition"
         >
@@ -158,7 +157,15 @@ const ReservationListClient: React.FC<Props> = ({ reservations }) => {
 
                 {/* Action */}
                 <div className="mt-4 flex justify-end">
-                  {item.Payment?.status === "unpaid" ? (
+                  {item.Payment?.status === "paid" ? (
+                    <Link
+                      href={`/myreservation/${item.id}`}
+                      className="px-5 py-2 text-sm rounded-lg bg-green-500 text-white font-medium hover:bg-green-600 transition"
+                    >
+                      View Detail
+                    </Link>
+                  ) : item.Payment?.status === "unpaid" ||
+                    item.Payment?.status === "pending" ? (
                     <Link
                       href={`/checkout/${item.id}`}
                       className="px-5 py-2 text-sm rounded-lg bg-orange-500 text-white font-medium hover:bg-orange-600 transition"
@@ -166,12 +173,9 @@ const ReservationListClient: React.FC<Props> = ({ reservations }) => {
                       Pay Now
                     </Link>
                   ) : (
-                    <Link
-                      href={`/myreservation/${item.id}`}
-                      className="px-5 py-2 text-sm rounded-lg bg-orange-500 text-white font-medium hover:bg-orange-600 transition"
-                    >
-                      View Detail
-                    </Link>
+                    <span className="px-5 py-2 text-sm rounded-lg bg-gray-300 text-gray-700 font-medium">
+                      Not Available
+                    </span>
                   )}
                 </div>
               </div>
@@ -179,9 +183,7 @@ const ReservationListClient: React.FC<Props> = ({ reservations }) => {
           </div>
         ))
       ) : (
-        <p className="text-center text-gray-500 mt-6">
-          No reservations found.
-        </p>
+        <p className="text-center text-gray-500 mt-6">No reservations found.</p>
       )}
 
       {/* Pagination */}
